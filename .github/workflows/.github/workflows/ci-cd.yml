@@ -1,0 +1,23 @@
+name: CI/CD for Nginx
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build and tag Docker image
+      run: |
+        docker build -t nginx-cicd-app .
+
+    - name: Show docker images
+      run: docker images
+
